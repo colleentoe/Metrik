@@ -27,6 +27,7 @@ public class MainWindow extends Frame implements WindowListener {
         _canvas = new DrawObject(500,500);
         add(_canvas);
         setMenuBar(new MenuBar());
+        setMenuBar(new MenuBar());
         setResizable(false);
     }
 

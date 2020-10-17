@@ -16,6 +16,8 @@ import java.awt.event.*;
 public class MenuBar extends java.awt.MenuBar implements ActionListener {
 
     private Menu _menu;
+    private Menu _menuSize;
+    private int[] _size = {25,50,75,100};
 
     /**
      * Constructor of this class. Generates a manu based of the values the enum.
@@ -33,12 +35,25 @@ public class MenuBar extends java.awt.MenuBar implements ActionListener {
         add(_menu);
 
         _menu.addActionListener(this);
+
+        _menuSize = new Menu("Circle size");
+
+        for (int value:_size) {
+            MenuItem newItem = new MenuItem("Size: " + value);
+            newItem.setActionCommand(Integer.toString(value));
+            _menuSize.add(newItem);
+        }
+
+        _menuSize.addActionListener(this);
+
+        add(_menuSize);
     }
 
 
     /**
-     * Method will be called when the user clicked on a menu item. The value of the color will be send to the
-     * MainWindow class.
+     * Method will be called when the user clicked on a menu item.
+     * The value of the color will be send to the MainWindow class.
+     * The value of the circle size will be send to the DrawObject class.
      * @param e
      */
     @Override
@@ -48,6 +63,10 @@ public class MenuBar extends java.awt.MenuBar implements ActionListener {
                 MainWindow.updateBackground(value);
             }
         }
-
+        for (int value:_size) {
+            if(Integer.toString(value).compareTo(e.getActionCommand())==0){
+                DrawObject.updateSize(value);
+            }
+        }
     }
 }

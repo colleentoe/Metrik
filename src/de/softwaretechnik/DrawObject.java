@@ -19,7 +19,8 @@ import java.awt.geom.Ellipse2D;
 public class DrawObject extends Canvas implements MouseListener {
 
     private float _x,_y;
-    private int _count,_heightCirc,_widthCirc;
+    private int _count;
+    private static int _radius;
     private int _heightWindow, _widthWindow;
 
     /**
@@ -32,12 +33,16 @@ public class DrawObject extends Canvas implements MouseListener {
         this._heightWindow = _heightWindow;
         _count=0;
         _x = _y = 0;
-        _heightCirc = _widthCirc = 50;
+        _radius = 50;
 
         setSize(_widthWindow,_heightWindow);
         setBackground(Color.lightGray);
 
         addMouseListener(this);
+    }
+
+    public static void updateSize(int value){
+        _radius = value;
     }
 
     /**
@@ -62,8 +67,8 @@ public class DrawObject extends Canvas implements MouseListener {
             g2d.setStroke(new BasicStroke(2.5F));
 
             Ellipse2D ellipse2D = new Ellipse2D.Float(
-                    _x-_widthCirc/2, _y-_heightCirc/2,
-                    _widthCirc, _heightCirc);
+                    _x-_radius/2, _y-_radius/2,
+                    _radius, _radius);
 
             g2d.draw(ellipse2D);
 
