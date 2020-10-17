@@ -8,7 +8,7 @@ import java.awt.geom.Ellipse2D;
  * @author1 Colleen Tölle M24730
  * @author2 Denice Graupeter M26783
  * @date 2020-10-16
- * @version 1.0
+ * @version 1.1.1
  *
  * Softwaretechnik, exercise 1
  *
@@ -50,12 +50,19 @@ public class DrawObject extends Canvas implements MouseListener {
             Graphics2D g2d = (Graphics2D) g;
 
             g2d.setStroke(new BasicStroke(2.5F));
+
             Ellipse2D ellipse2D = new Ellipse2D.Float(
                     _x-_widthCirc/2, _y-_heightCirc/2,
                     _widthCirc, _heightCirc);
 
-
             g2d.draw(ellipse2D);
+
+            if (_count == 1){
+                g2d.drawString("Kreis 1:  X:   "+ _x +"  Y:  "+ _y ,15, 15);
+            }
+            else {
+                g2d.drawString("Kreis 2:  X:   "+ _x +"  Y:  "+ _y ,15, 30);
+            }
         }
     }
 
@@ -66,13 +73,20 @@ public class DrawObject extends Canvas implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         if(_count==2 && e.getClickCount()==2){
+
+            _x = 0;
+            _y = 0;
+            update(getGraphics());
+
             getGraphics().clearRect(getX(),getY(),_widthWindow,_heightWindow);
             _count=0;
-        }else if(e.getClickCount()==2){
+        }
+        else if(e.getClickCount()==2){
             _x = e.getX();
             _y = e.getY();
-            paint(getGraphics());
             _count++;
+
+            paint(getGraphics());
         }
     }
 

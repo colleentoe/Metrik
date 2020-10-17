@@ -7,7 +7,7 @@ import java.awt.event.*;
  * @author1 Colleen Tölle M24730
  * @author2 Denice Graupeter M26783
  * @date 2020-10-16
- * @version 1.0
+ * @version 1.1.1
  *
  * Softwaretechnik, exercise 1
  *
@@ -19,7 +19,7 @@ public class MainWindow extends Frame implements WindowListener {
      * Constructor of this class. Sets important values and adds a window listener and a Canvas inside of this window.
      */
     public MainWindow() {
-        setTitle("Programm für Softwaretechnik");
+        setTitle("Metrik Version 1.1.1");
         setSize(500,500);
 
         addWindowListener(this);
