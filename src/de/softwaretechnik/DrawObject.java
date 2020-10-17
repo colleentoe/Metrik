@@ -2,13 +2,13 @@ package de.softwaretechnik;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.geom.Ellipse2D;
+import java.awt.geom.Rectangle2D;
 
 /**
  * @author1 Colleen Tölle M24730
  * @author2 Denice Graupeter M26783
  * @date 2020-10-16
- * @version 1.0
+ * @version 1.0.1
  *
  * Softwaretechnik, exercise 1
  *
@@ -41,7 +41,7 @@ public class DrawObject extends Canvas implements MouseListener {
     }
 
     /**
-     * This method paints the circle on the position where the user double clicked.
+     * This method paints the rectangle on the position where the user double clicked.
      * @param g
      */
     @Override
@@ -49,13 +49,12 @@ public class DrawObject extends Canvas implements MouseListener {
         if(_x!=0||_y!=0) {
             Graphics2D g2d = (Graphics2D) g;
 
-            g2d.setStroke(new BasicStroke(2.5F));
-            Ellipse2D ellipse2D = new Ellipse2D.Float(
+            Rectangle2D rectangle2D = new Rectangle2D.Float(
                     _x-_widthCirc/2, _y-_heightCirc/2,
                     _widthCirc, _heightCirc);
 
 
-            g2d.draw(ellipse2D);
+            g2d.draw(rectangle2D);
         }
     }
 
