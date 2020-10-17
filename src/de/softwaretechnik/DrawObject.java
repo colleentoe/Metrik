@@ -8,7 +8,7 @@ import java.awt.geom.Ellipse2D;
  * @author1 Colleen Tölle M24730
  * @author2 Denice Graupeter M26783
  * @date 2020-10-16
- * @version 1.1.1
+ * @version 1.2
  *
  * Softwaretechnik, exercise 1
  *
@@ -38,6 +38,16 @@ public class DrawObject extends Canvas implements MouseListener {
         setBackground(Color.lightGray);
 
         addMouseListener(this);
+    }
+
+    /**
+     * With the change of the Background color the previous input of the users click will be cleard too.
+     * @param color
+     */
+    public void updateBackground(Color color){
+        _x = _y = 0;
+        _count = 0;
+        this.setBackground(color);
     }
 
     /**
