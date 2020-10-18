@@ -3,18 +3,20 @@ package de.softwaretechnik;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.Ellipse2D;
+import java.util.*;
 
 /**
  * @author1 Colleen Tölle M24730
  * @author2 Denice Graupeter M26783
  * @date 2020-10-16
- * @version 1.2.1
+ * @version 1.3
  *
  * Softwaretechnik, exercise 1
  *
  * Description:
  * The instance of this class generates a canvas. A circle will be painted when the user click
- * twice on the canvas. On a third double click the canvas will be cleared.
+ * twice on the canvas. On a third double click the canvas will be cleared. When the user has two circles
+ * on the canvas the circles will be connected. The user can also see the coordinates and the distance of the circles.
  **/
 public class DrawObject extends Canvas implements MouseListener {
 
@@ -32,8 +34,7 @@ public class DrawObject extends Canvas implements MouseListener {
         this._widthWindow = _widthWindow;
         this._heightWindow = _heightWindow;
         _count=0;
-        _x = _y = 0;
-        _x2 = _y2 = 0;
+        _x = _y =_x2 = _y2 = 0;
         _radius = 50;
 
         setSize(_widthWindow,_heightWindow);
@@ -51,14 +52,16 @@ public class DrawObject extends Canvas implements MouseListener {
      * @param color
      */
     public void updateBackground(Color color){
-        _x = _y = 0;
-        _x2 = _y2 = 0;
+        _x = _y = _x2 = _y2 = 0;
         _count = 0;
         this.setBackground(color);
     }
 
     /**
-     * This method paints the circle on the position where the user double clicked.
+     * This method paints the circle on the position where the user double clicked and shows the coordinates of
+     * this position.
+     * Whith the second circle the method also draws a line and calculate the distance
+     * between the two circles.
      * @param g
      */
     @Override
@@ -91,7 +94,10 @@ public class DrawObject extends Canvas implements MouseListener {
             else {
                 g2d.drawString("Circle 2:  X:   "+ _x2 +"  Y:  "+ _y2 ,15, 30);
                 double distance = Math.sqrt(Math.pow((_x-_x2), 2) + Math.pow((_y-_y2), 2));
-                g2d.drawString("Distance: " + distance,15, 45);
+                System.out.println(distance);
+                g2d.drawString("Distance: " + Double.parseDouble(String.format(Locale.ENGLISH,"%1.2f",distance)) + " px",15, 45);
+                g2d.setColor(Color.red);
+                g2d.drawLine((int)_x,(int)_y,(int)_x2,(int)_y2);
             }
         }
     }
@@ -103,14 +109,9 @@ public class DrawObject extends Canvas implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         if(_count==2 && e.getClickCount()==2){
-
-            _x = 0;
-            _y = 0;
-            _x2 = 0;
-            _y2 = 0;
+            _x = _y = _x2 = _y2 = 0;
             update(getGraphics());
 
-            getGraphics().clearRect(getX(),getY(),_widthWindow,_heightWindow);
             _count=0;
         }
         else if(e.getClickCount()==2){

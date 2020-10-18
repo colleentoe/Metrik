@@ -7,7 +7,7 @@ import java.awt.event.*;
  * @author1 Colleen Tölle M24730
  * @author2 Denice Graupeter M26783
  * @date 2020-10-17
- * @version 1.2.1
+ * @version 1.3
  *
  * Softwaretechnik, exercise 1
  *
