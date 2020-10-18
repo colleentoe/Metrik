@@ -7,7 +7,7 @@ import java.awt.event.*;
  * @author1 Colleen Tölle M24730
  * @author2 Denice Graupeter M26783
  * @date 2020-10-17
- * @version 1.2.2
+ * @version 1.2.1
  *
  * Softwaretechnik, exercise 1
  *
@@ -23,7 +23,7 @@ public class MenuBar extends java.awt.MenuBar implements ActionListener {
      * Constructor of this class. Generates a manu based of the values the enum.
      */
     public MenuBar() {
-        _menu = new Menu("Background color");
+        _menu = new Menu("Background Color");
 
         for (BackgroundColor value:BackgroundColor.values()) {
 
