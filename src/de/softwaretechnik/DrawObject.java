@@ -8,17 +8,18 @@ import java.awt.geom.Ellipse2D;
  * @author1 Colleen Tölle M24730
  * @author2 Denice Graupeter M26783
  * @date 2020-10-16
- * @version 1.2
+ * @version 1.2.2
  *
  * Softwaretechnik, exercise 1
  *
  * Description:
  * The instance of this class generates a canvas. A circle will be painted when the user click
- * twice on the canvas. On a third double click the canvas will be cleared.
+ * twice on the canvas. On a third double click the canvas will be cleared. When the user has two circles
+ * on the canvas the circles will be connected. The user can also see the coordinates of the circles.
  **/
 public class DrawObject extends Canvas implements MouseListener {
 
-    private float _x,_y;
+    private float _x,_y,_xPrev,_yPrev;
     private int _count;
     private static int _radius;
     private int _heightWindow, _widthWindow;
@@ -32,7 +33,7 @@ public class DrawObject extends Canvas implements MouseListener {
         this._widthWindow = _widthWindow;
         this._heightWindow = _heightWindow;
         _count=0;
-        _x = _y = 0;
+        _x = _y = _xPrev = _yPrev = 0;
         _radius = 50;
 
         setSize(_widthWindow,_heightWindow);
@@ -56,7 +57,9 @@ public class DrawObject extends Canvas implements MouseListener {
     }
 
     /**
-     * This method paints the circle on the position where the user double clicked.
+     * This method paints the circle on the position where the user double clicked and shows the coordinates of
+     * this position.
+     * Whith the second circle the method also draws a line between the two circles.
      * @param g
      */
     @Override
@@ -73,10 +76,14 @@ public class DrawObject extends Canvas implements MouseListener {
             g2d.draw(ellipse2D);
 
             if (_count == 1){
-                g2d.drawString("Kreis 1:  X:   "+ _x +"  Y:  "+ _y ,15, 15);
+                g2d.drawString("Circle 1:  X:   "+ _x +"  Y:  "+ _y ,15, 15);
+                _xPrev = _x;
+                _yPrev = _y;
             }
             else {
-                g2d.drawString("Kreis 2:  X:   "+ _x +"  Y:  "+ _y ,15, 30);
+                g2d.drawString("Circle 2:  X:   "+ _x +"  Y:  "+ _y ,15, 30);
+                g2d.setColor(Color.red);
+                g2d.drawLine((int)_xPrev,(int)_yPrev,(int)_x,(int)_y);
             }
         }
     }
@@ -88,12 +95,10 @@ public class DrawObject extends Canvas implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         if(_count==2 && e.getClickCount()==2){
-
             _x = 0;
             _y = 0;
             update(getGraphics());
 
-            getGraphics().clearRect(getX(),getY(),_widthWindow,_heightWindow);
             _count=0;
         }
         else if(e.getClickCount()==2){
